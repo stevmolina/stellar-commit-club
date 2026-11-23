@@ -67,6 +67,7 @@ Commit in small logical steps (contract, page, docs), e.g. `feat(contract): add 
 ```bash
 git push origin main
 gh api -X POST "repos/$OWNER/<name>/pages" -f "source[branch]=main" -f "source[path]=/docs" 2>/dev/null || true
+gh api -X POST "repos/$OWNER/<name>/pages/builds" >/dev/null 2>&1 || true   # make sure a build runs
 ```
 Pages URL: `https://$OWNER.github.io/<name>/`. Poll `gh api repos/$OWNER/<name>/pages/builds/latest --jq .status` until `built` (up to ~2 min); then `curl -sI` the URL and check for 200.
 

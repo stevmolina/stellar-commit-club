@@ -33,7 +33,11 @@ git diff HEAD | grep -nE 'S[A-Z2-7]{55}|BEGIN (RSA|OPENSSH|EC) PRIVATE KEY|seed 
 `S` + 55 base32 chars is a Stellar secret key. Also refuse to commit `.env`, `*.secret`, `identity/*.toml`.
 
 ### 4. Classify
-- **Path** (`$ARGUMENTS` if given, else infer, else ask once): `first-commit` (event / gratitude repo), `lendara` (any repo under `Lendara-Org`), `own-project`, `stellarize` (repo made with /stellarize).
+- **Path** (`$ARGUMENTS` if given, else infer from the upstream repo):
+  - `first-commit`: **only** the event repo `mariaelisaaraya/Proof-of-Gratitude`.
+  - `lendara`: any repo under `Lendara-Org`.
+  - `stellarize`: a repo created by /stellarize (from the `proof-of-thanks-starter` template) that the user owns.
+  - `own-project`: everything else.
 - **Category**: `docs` if every changed file is docs/text/images (`*.md`, `*.mdx`, `*.txt`, `docs/**` text, images, translations); otherwise `technical` (code, tests, contracts, config). Docs contributions are welcome but are **not** counted as Stellar technical commits; say so kindly if relevant.
 
 ### 5. Branch, commit, push, PR

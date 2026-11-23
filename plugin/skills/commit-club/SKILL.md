@@ -18,19 +18,27 @@ The user may know nothing about git. You do every step and explain in one short 
 ## Steps
 
 ### 1. GitHub ready
-`gh auth status`. If not signed in: `gh auth login --hostname github.com --git-protocol https --web`, tell the user to open the link and paste the code, then `gh auth setup-git`. Make sure `git config user.name`/`user.email` are set (use `gh api user --jq .login` and `<login>@users.noreply.github.com`).
+If `gh` is missing: macOS `brew install gh`, Windows `winget install GitHub.cli`, Linux the release tarball from https://github.com/cli/cli/releases into `~/.local/bin`.
+
+Sign in without blocking (a foreground login would hang):
+```bash
+gh auth status || { (gh auth login --hostname github.com --git-protocol https --web > /tmp/gh-login.txt 2>&1 &); sleep 3; cat /tmp/gh-login.txt; }
+```
+Show the user the one-time code and `https://github.com/login/device`, poll `gh auth status` every 5 s (up to 3 min), then `gh auth setup-git`. Make sure `git config user.name`/`user.email` are set (use `gh api user --jq .login` and `<login>@users.noreply.github.com`).
 
 ### 2. Understand the change
 - `git status --short`, `git diff --stat`, `git remote -v`, current branch.
+- No local clone yet (common for `first-commit` and `lendara`)? `gh repo fork <owner/repo> --clone --remote` and work there; `origin` becomes their fork and `upstream` the original.
 - No repo or no changes? Ask what they worked on. If they haven't changed anything yet, suggest a starter task for their path (see "Paths") and stop until there's a change.
 - Read the diff so you can describe it in plain words.
 
 ### 3. Secret check (always)
 ```bash
-git diff HEAD --name-only; git ls-files --others --exclude-standard
+git add -N .            # make new (untracked, non-ignored) files visible to diff
+git diff HEAD --name-only
 git diff HEAD | grep -nE 'S[A-Z2-7]{55}|BEGIN (RSA|OPENSSH|EC) PRIVATE KEY|seed phrase|mnemonic|PRIVATE_KEY=|SECRET' || echo clean
 ```
-`S` + 55 base32 chars is a Stellar secret key. Also refuse to commit `.env`, `*.secret`, `identity/*.toml`.
+`S` + 55 base32 chars is a Stellar secret key. Also refuse to commit `.env*`, `*.secret`, `.stellar/`, `identity/*.toml`. Never use `git add -f` on ignored files. Run the same check again on `git diff --cached` right before committing.
 
 ### 4. Classify
 - **Path** (`$ARGUMENTS` if given, else infer from the upstream repo):
@@ -52,11 +60,14 @@ Use conventional types: `feat`, `fix`, `docs`, `test`, `chore`, `i18n`.
 
 Push target:
 - Check write access: `gh repo view --json viewerPermission --jq .viewerPermission`. `ADMIN`/`MAINTAIN`/`WRITE` → push to `origin`.
-- Otherwise fork: `gh repo fork --remote --remote-name fork` (keeps `origin` as upstream), then `git push -u fork "$BR"`.
+- Otherwise fork: `gh repo fork --remote --remote-name fork` (keeps `origin` as upstream), then `git push -u fork "$BR"`. (If you cloned with `gh repo fork --clone`, the fork is already `origin`: push there.)
 
-Open the PR against the upstream default branch:
+Open the PR against the upstream default branch, always explicit (non-interactive shells can't answer gh's prompts):
 ```bash
-gh pr create --title "<commit title>" --body "<body>"
+UP=<upstream owner/repo>          # the original repo, not the fork
+BASE=$(gh repo view "$UP" --json defaultBranchRef --jq .defaultBranchRef.name)
+gh repo set-default "$UP"
+gh pr create --repo "$UP" --base "$BASE" --head "$LOGIN:$BR" --title "<commit title>" --body "<body>"
 ```
 Body template:
 ```
@@ -79,7 +90,7 @@ For `stellarize` repos (user owns a brand-new repo), a direct push to `main` is 
 Add one comment to the shared Commit Club log issue (any GitHub user can comment on it, so there are no conflicts):
 ```bash
 LOG_REPO=stevmolina/stellar-commit-club
-ISSUE=$(gh issue list -R "$LOG_REPO" --label commit-club-log --state open --json number --jq '.[0].number')
+ISSUE=1   # "📋 Commit Club log · BAF × Stellar · 23 nov 2026"
 gh issue comment "$ISSUE" -R "$LOG_REPO" --body "$(cat <<EOF
 <!-- commit-club-entry -->
 | field | value |

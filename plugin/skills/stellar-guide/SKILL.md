@@ -43,4 +43,4 @@ Read the matching reference file and follow it. Every path ends with the user's 
 If the official skill or the MCP is missing, offer to install it in one line, then continue. Before shipping a contract, check it against Soroban Common Mistakes.
 
 ## 3. Close
-End with the links the reference file asks for, and: "Mostrale los links a Steven o Elisa." Suggest one next step.
+If you made a PR, commit or page, end with the links the reference file asks for and "Mostrale los links a Steven o Elisa." Always suggest one next step.

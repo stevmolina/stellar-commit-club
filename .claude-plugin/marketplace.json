@@ -1,0 +1,25 @@
+{
+  "$schema": "https://code.claude.com/schemas/marketplace.json",
+  "name": "stellar-commit-club",
+  "owner": {
+    "name": "Steven Molina",
+    "url": "https://github.com/stevmolina"
+  },
+  "plugins": [
+    {
+      "name": "commit-club",
+      "source": "./plugin",
+      "description": "Ship a Stellar Testnet project and a logged PR without thinking about Stellar, git or GitHub: /stellarize and /commit-club",
+      "version": "0.1.0"
+    },
+    {
+      "name": "stellar-dev",
+      "source": {
+        "source": "github",
+        "repo": "stellar/stellar-dev-skill"
+      },
+      "description": "Official Stellar Development Foundation skill: contracts, SDKs, RPC, wallets, testing, security"
+    }
+  ],
+  "description": "BAF × Stellar Commit Club kit: ship on Stellar Testnet with your AI agent"
+}

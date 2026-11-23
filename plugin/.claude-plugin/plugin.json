@@ -1,0 +1,8 @@
+{
+  "name": "commit-club",
+  "description": "BAF × Stellar Commit Club kit: /stellarize turns an idea into a live Stellar Testnet dApp; /commit-club turns any change into a reviewable, logged PR.",
+  "version": "0.1.0",
+  "author": { "name": "Steven Molina", "url": "https://github.com/stevmolina" },
+  "homepage": "https://github.com/stevmolina/stellar-commit-club",
+  "skills": "./skills/"
+}

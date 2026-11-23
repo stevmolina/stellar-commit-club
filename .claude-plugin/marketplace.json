@@ -10,7 +10,7 @@
       "name": "commit-club",
       "source": "./plugin",
       "description": "Ship a Stellar Testnet project and a logged PR without thinking about Stellar, git or GitHub: /stellarize and /commit-club",
-      "version": "0.1.1"
+      "version": "0.2.0"
     },
     {
       "name": "stellar-dev",

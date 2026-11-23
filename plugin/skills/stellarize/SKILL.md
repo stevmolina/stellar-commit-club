@@ -24,6 +24,8 @@ Track these as a checklist and tell the user one short line per step ("✅ Walle
 ### 1. Get the idea (one question max)
 If `$ARGUMENTS` has an idea, use it. Otherwise ask once: "¿Qué querés construir? Contámelo en una frase (ej: 'un frasco de propinas para agradecer a mis amigos')." If they have no idea, propose the template as-is: "Proof of Thanks, agradecimientos públicos en Stellar."
 
+Apply the event's test, "Si le saco Stellar, ¿deja de funcionar?": the contract must hold something that matters (a signed record, a one-per-wallet rule, a balance, a vote). If the idea would work the same without Stellar, nudge it in one sentence toward what only a signed, public, verifiable record gives it. Before inventing a mechanism, remember the slides' "¿Ya existe?": for payments, on/off ramps or privacy, point to Lendara Anchor/Shield or the Stellar Integration Track catalog in "Próximos pasos" instead of building it.
+
 Turn it into: a short repo name (`kebab-case`, ≤ 30 chars, e.g. `tip-jar-stellar`), a one-line pitch, and the minimal contract change (or "no change, just rebrand").
 
 ### 2. Basic tools and GitHub
@@ -86,8 +88,8 @@ gh api -X POST "repos/$OWNER/<name>/pages/builds" >/dev/null 2>&1 || true   # ma
 ```
 Pages URL: `https://$OWNER.github.io/<name>/`. Poll `gh api repos/$OWNER/<name>/pages/builds/latest --jq .status` until `built` (up to ~2 min); then `curl -sI` the URL and check for 200.
 
-### 8. Log it for the Commit Club
-Run the `commit-club` skill's **log step** with path `stellarize`, category `technical`, and the repo + latest commit URL as evidence (no extra PR needed: it's their own new repo).
+### 8. Sign the Proof of Gratitude wall
+Run the `commit-club` skill's **step 6** with path `stellarize`: add or update the user's entry in `mariaelisaaraya/Proof-of-Gratitude` with `tu_proyecto` (the one-line pitch + page URL) and `commits_hoy` (`https://github.com/<owner>/<name>/commits?author=<login>`). Ask for `nombre` and `conoci_stellar` if you don't have them (for someone who never used Stellar, today's date is fine). No extra PR is needed for their own new repo.
 
 ### 9. Hand-off (short!)
 ```
@@ -96,6 +98,7 @@ Run the `commit-club` skill's **log step** with path `stellarize`, category `tec
 • Código: https://github.com/<owner>/<name>
 • Contrato: https://stellar.expert/explorer/testnet/contract/<id>
 • Prueba on-chain: <tx link from smoke test>
+• Tu firma en Proof of Gratitude: <PR url> (cuando se mergee, se prende tu punto)
 Para usar la página: instalá Freighter, ponela en Testnet y fondeá tu cuenta con Friendbot (hay un link en la página).
 Próximos pasos: <1–3 ideas>
 ```

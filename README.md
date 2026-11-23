@@ -1,17 +1,17 @@
 # Stellar Commit Club kit 💜
 
-Ship on **Stellar Testnet** with your AI coding agent, without thinking about Stellar, git or GitHub.
+Construí en **Stellar Testnet** con tu agente de IA, sin pelearte con Stellar, git ni GitHub. Sin plata real.
 
-Built for **The Commit Club** at BAF × Stellar: Proof of Gratitude (Buenos Aires, Nov 23 2026).
+Hecho para **The Commit Club** de BAF × Stellar: Proof of Gratitude (Buenos Aires, 23 nov 2026). Todo termina en el mismo lugar: tu firma en [**Proof of Gratitude**](https://github.com/mariaelisaaraya/Proof-of-Gratitude), la vida de Stellar semana a semana.
 
-| Command | What it does |
+| Comando | Qué hace |
 |---|---|
-| `/stellarize [idea]` | Idea in plain words → Soroban contract deployed on Testnet + web page on GitHub Pages + GitHub repo + on-chain proof link. |
-| `/commit-club` | Whatever you changed → secret check → branch, commit, fork if needed → reviewable PR → logged as event evidence. |
+| `/stellarize [idea]` | De una idea en una frase a un contrato Soroban en Testnet, una página publicada en GitHub Pages, un repo propio y un link de prueba on-chain. |
+| `/commit-club` | De cualquier cambio a un PR revisable: revisa que no haya claves, hace la rama, el commit y el fork si hace falta, y deja tu firma en Proof of Gratitude. |
 
-Also installs the **official Stellar skill** ([stellar/stellar-dev-skill](https://github.com/stellar/stellar-dev-skill)) and the **Stellar Docs MCP** (`https://developers.stellar.org/mcp`), so your agent uses up-to-date Stellar knowledge. Testnet only, no real money, no sign-ins besides GitHub.
+Incluye la **skill oficial de Stellar** ([stellar/stellar-dev-skill](https://github.com/stellar/stellar-dev-skill), la misma de las slides) y el **Stellar Docs MCP** (`https://developers.stellar.org/mcp`), así tu agente responde con contexto oficial y no de memoria.
 
-## Install
+## Instalar
 
 ### Claude Code
 ```
@@ -19,42 +19,42 @@ Also installs the **official Stellar skill** ([stellar/stellar-dev-skill](https:
 /plugin install commit-club@stellar-commit-club
 /plugin install stellar-dev@stellar-commit-club
 ```
-Then restart Claude Code and type `/stellarize`.
+Reiniciá Claude Code y escribí `/stellarize`. Si ya instalaste `stellar-dev` desde las slides, saltá la última línea.
 
-### Codex, Cursor and other agents
+### Codex, Cursor y otros agentes
 ```bash
 curl -fsSL https://raw.githubusercontent.com/stevmolina/stellar-commit-club/main/install.sh | bash
 ```
-Then ask your agent: "use the stellarize skill to build …".
+Después pedile a tu agente: "usá la skill stellarize para construir …".
 
-### No agent?
-Use the browser path at the event, or open the starter in Codespaces: [proof-of-thanks-starter](https://github.com/stevmolina/proof-of-thanks-starter).
+### ¿Sin agente o sin Git?
+Seguí el camino web de las slides: en el [repo del evento](https://github.com/mariaelisaaraya/Proof-of-Gratitude), **Add file → Create new file** en `src/content/community/`, copiá la plantilla y **Propose changes**. O abrí el [starter](https://github.com/stevmolina/proof-of-thanks-starter) en GitHub Codespaces, que ya trae todo instalado.
 
-## What you need
+## Los tres caminos
 
-- A GitHub account (the agent signs you in with a browser code).
-- A laptop with git and Node 22.12+. The agent installs Rust and the Stellar CLI for you. On Windows, or if anything fails, use **GitHub Codespaces**: everything is preinstalled.
-- To use the dApps in the browser: [Freighter](https://www.freighter.app) set to **Testnet**.
+| Camino | Con el kit | Tu firma |
+|---|---|---|
+| 01 Mi primer commit | `/commit-club first-commit`: te pregunta cuándo conociste Stellar y a quién agradecés, y arma tu archivo. | Tu punto en la semana en que conociste Stellar |
+| 02 Lendara | Probá o mejorá [Anchor](https://github.com/Lendara-Org/Lendara-monorepo) o [Shield](https://github.com/Lendara-Org/lendara-shield), después `/commit-club lendara`. | Tu entrada con `tu_proyecto` y `commits_hoy` |
+| 03 Mi proyecto | `/commit-club` en tu repo, o `/stellarize` para arrancar uno de cero. | Tu entrada con `tu_proyecto` y `commits_hoy` |
 
-## How it fits the Commit Club paths
+Las dos preguntas de las slides también están en el kit: **«¿Ya existe?»** (antes de construir, el agente busca piezas como Lendara o el catálogo de integraciones) y **«Si le saco Stellar, ¿deja de funcionar?»** (`/stellarize` se asegura de que el contrato haga algo que importa).
 
-| Path | Use |
-|---|---|
-| 1. Mi primer commit | Browser path on the event repo; `/commit-club` if you have an agent. |
-| 2. Lendara | Make a change in a `Lendara-Org` repo, then `/commit-club lendara`. |
-| 3. Mi proyecto | `/commit-club own-project` on your repo, or `/stellarize` to start one from zero. |
+## Qué necesitás
 
-Evidence is logged as a comment on the [Commit Club log issue](../../issues?q=label%3Acommit-club-log): GitHub user, path, technical or docs, PR/commit link, status.
+- Una cuenta de GitHub. El agente te loguea con un código en el navegador.
+- Compu con git y Node 22.12+. El agente instala Rust y la Stellar CLI (la primera vez baja unos 200 MB). En Windows, o si algo falla, usá **GitHub Codespaces**.
+- Para usar las apps en el navegador: [Freighter](https://www.freighter.app) en **Testnet**.
 
-## Layout
+## Estructura
 
 ```
-.claude-plugin/marketplace.json   # this repo is a Claude Code marketplace
-plugin/                           # the commit-club plugin
+.claude-plugin/marketplace.json   # este repo es un marketplace de Claude Code
+plugin/
   skills/stellarize/SKILL.md
   skills/commit-club/SKILL.md
   .mcp.json                       # Stellar Docs MCP
-install.sh                        # installer for non-Claude agents
+install.sh                        # instalador para Codex, Cursor y otros
 ```
 
-The project template lives in [stevmolina/proof-of-thanks-starter](https://github.com/stevmolina/proof-of-thanks-starter).
+La plantilla de proyecto está en [stevmolina/proof-of-thanks-starter](https://github.com/stevmolina/proof-of-thanks-starter).

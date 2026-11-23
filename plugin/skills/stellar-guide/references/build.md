@@ -1,12 +1,4 @@
----
-name: stellarize
-description: Turn a plain-language idea into a live Stellar Testnet dApp (Soroban contract + web page on GitHub Pages + GitHub repo) without the user knowing anything about Stellar, git or GitHub. Use when the user runs /stellarize, or says they want to build, start or ship something on Stellar, Soroban or Testnet.
-argument-hint: "[your idea in plain words]"
----
-
-# /stellarize: idea → live Stellar Testnet project
-
-You do **all** the technical work. The user only describes an idea and, at most, clicks one GitHub sign-in link. Never ask them to choose libraries, networks, folder names or git commands. Talk to them in their language (Spanish if they write in Spanish), in short, friendly sentences, no jargon.
+# Build: idea → live Stellar Testnet project
 
 ## Hard rules
 
@@ -15,14 +7,14 @@ You do **all** the technical work. The user only describes an idea and, at most,
 - **Start from the starter template**, don't invent a stack: `stevmolina/proof-of-thanks-starter` (Soroban contract `contracts/gratitude` + static page in `docs/` + scripts). Read its `AGENTS.md` after cloning and follow it.
 - **Keep scope tiny**: something that works in ~30 minutes. One contract, at most 3 public functions changed or added. If the idea is bigger, build the smallest slice and list the rest as "next steps".
 - Never merge PRs, never force-push, never delete repos.
-- If a step fails, fix it yourself (read the error, retry, use the official `stellar-dev` skill or the `stellar-docs` MCP). Only hand back to the user for the GitHub sign-in.
+- If a step fails, fix it yourself (read the error, retry, use the official `stellar-dev` skill, the `stellar-docs` MCP or Raven). Only hand back to the user for the GitHub sign-in.
 
 ## Steps
 
 Track these as a checklist and tell the user one short line per step ("✅ Wallet de prueba lista").
 
 ### 1. Get the idea (one question max)
-If `$ARGUMENTS` has an idea, use it. Otherwise ask once: "¿Qué querés construir? Contámelo en una frase (ej: 'un frasco de propinas para agradecer a mis amigos')." If they have no idea, propose the template as-is: "Proof of Thanks, agradecimientos públicos en Stellar."
+If the user already gave an idea, use it. Otherwise ask once: "¿Qué querés construir? Contámelo en una frase (ej: 'un frasco de propinas para agradecer a mis amigos')." If they have no idea, propose the template as-is: "Proof of Thanks, agradecimientos públicos en Stellar."
 
 Apply the event's test, "Si le saco Stellar, ¿deja de funcionar?": the contract must hold something that matters (a signed record, a one-per-wallet rule, a balance, a vote). If the idea would work the same without Stellar, nudge it in one sentence toward what only a signed, public, verifiable record gives it. Before inventing a mechanism, remember the slides' "¿Ya existe?": for payments, on/off ramps or privacy, point to Lendara Anchor/Shield or the Stellar Integration Track catalog in "Próximos pasos" instead of building it.
 
@@ -89,7 +81,7 @@ gh api -X POST "repos/$OWNER/<name>/pages/builds" >/dev/null 2>&1 || true   # ma
 Pages URL: `https://$OWNER.github.io/<name>/`. Poll `gh api repos/$OWNER/<name>/pages/builds/latest --jq .status` until `built` (up to ~2 min); then `curl -sI` the URL and check for 200.
 
 ### 8. Sign the Proof of Gratitude wall
-Run the `commit-club` skill's **step 6** with path `stellarize`: add or update the user's entry in `mariaelisaaraya/Proof-of-Gratitude` with `tu_proyecto` (the one-line pitch + page URL) and `commits_hoy` (`https://github.com/<owner>/<name>/commits?author=<login>`). Ask for `nombre` and `conoci_stellar` if you don't have them (for someone who never used Stellar, today's date is fine). No extra PR is needed for their own new repo.
+Follow `references/pr-and-sign.md` **step 6** with path `stellarize`: add or update the user's entry in `mariaelisaaraya/Proof-of-Gratitude` with `tu_proyecto` (the one-line pitch + page URL) and `commits_hoy` (`https://github.com/<owner>/<name>/commits?author=<login>`). Ask for `nombre` and `conoci_stellar` if you don't have them (for someone who never used Stellar, today's date is fine). No extra PR is needed for their own new repo.
 
 ### 9. Hand-off (short!)
 ```

@@ -1,8 +1,11 @@
 {
   "name": "commit-club",
-  "description": "BAF × Stellar Commit Club kit: /stellarize turns an idea into a live Stellar Testnet dApp; /commit-club turns any change into a reviewable, logged PR.",
-  "version": "0.2.0",
-  "author": { "name": "Steven Molina", "url": "https://github.com/stevmolina" },
+  "description": "BAF × Stellar Commit Club kit: one skill, /stellar-guide, that guides you from idea or change to a Stellar Testnet project, a PR and your signature, using the official Stellar skill, Docs MCP and Raven.",
+  "version": "0.3.0",
+  "author": {
+    "name": "Steven Molina",
+    "url": "https://github.com/stevmolina"
+  },
   "homepage": "https://github.com/stevmolina/stellar-commit-club",
   "skills": "./skills/"
 }

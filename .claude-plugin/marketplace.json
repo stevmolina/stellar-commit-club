@@ -9,8 +9,8 @@
     {
       "name": "commit-club",
       "source": "./plugin",
-      "description": "Ship a Stellar Testnet project and a logged PR without thinking about Stellar, git or GitHub: /stellarize and /commit-club",
-      "version": "0.2.0"
+      "description": "BAF × Stellar Commit Club kit: one skill, /stellar-guide, that guides you from idea or change to a Stellar Testnet project, a PR and your signature, using the official Stellar skill, Docs MCP and Raven.",
+      "version": "0.3.0"
     },
     {
       "name": "stellar-dev",

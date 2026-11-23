@@ -1,12 +1,4 @@
----
-name: commit-club
-description: Turn whatever the user changed into a clean, reviewable GitHub pull request and sign it on the event's Proof of Gratitude wall, handling fork, branch, commit, push and PR for them. Use when the user runs /commit-club, or says they want to submit, send, open a PR for, or register their contribution, commit or change at the Commit Club / BAF × Stellar event.
-argument-hint: "[optional: lendara | own-project | first-commit | stellarize]"
----
-
-# /commit-club: change → reviewable PR → your dot on Proof of Gratitude
-
-The user may know nothing about git. You do every step and explain in one short line each. Speak their language (Spanish if they write in Spanish).
+# Ship: change → reviewable PR → signature on Proof of Gratitude
 
 ## Hard rules
 
@@ -41,10 +33,10 @@ git diff HEAD | grep -nE 'S[A-Z2-7]{55}|BEGIN (RSA|OPENSSH|EC) PRIVATE KEY|seed 
 `S` + 55 base32 chars is a Stellar secret key. Also refuse to commit `.env*`, `*.secret`, `.stellar/`, `identity/*.toml`. Never use `git add -f` on ignored files. Run the same check again on `git diff --cached` right before committing.
 
 ### 4. Classify
-- **Path** (`$ARGUMENTS` if given, else infer from the upstream repo):
+- **Path** (what the user said, else infer from the upstream repo):
   - `first-commit`: **only** the event repo `mariaelisaaraya/Proof-of-Gratitude`.
   - `lendara`: any repo under `Lendara-Org`.
-  - `stellarize`: a repo created by /stellarize (from the `proof-of-thanks-starter` template) that the user owns.
+  - `stellarize`: a repo created with the build flow (`references/build.md`) (from the `proof-of-thanks-starter` template) that the user owns.
   - `own-project`: everything else.
 - **Category**: `docs` if every changed file is docs/text/images (`*.md`, `*.mdx`, `*.txt`, `docs/**` text, images, translations); otherwise `technical` (code, tests, contracts, config). Docs contributions are welcome but are **not** counted as Stellar technical commits; say so kindly if relevant.
 
@@ -137,4 +129,4 @@ These match the three paths on the event slides ("Mi primer commit", "Lendara", 
 
 - **01 Mi primer commit**: your entry file in `mariaelisaaraya/Proof-of-Gratitude` (step 6). Follow its `CONTRIBUTING.md`.
 - **02 Lendara** (Testnet, no real money): **Anchor** = `Lendara-Org/Lendara-monorepo` (local currency → USDC on-ramp, sandbox with test cards, demo https://lendara-monorepo-fixh.vercel.app/es) and **Shield** = `Lendara-Org/lendara-shield` (compliant privacy, demo https://lendara-shield.duckdns.org/). Ideas: try the demo and fix what confused you, improve docs, add a translation (ES/EN/PT), write a test, or integrate one into your project. Check open issues first: `gh issue list -R <repo>`.
-- **03 Mi proyecto**: read the repo's README/AGENTS.md and make the smallest valuable change (a test, a bug, a docs gap). Ask the slides' question with them: "Si le saco Stellar, ¿deja de funcionar?" If not, help them find the one thing Stellar really does in their project; that can be the contribution. No project yet? Use `/stellarize`.
+- **03 Mi proyecto**: read the repo's README/AGENTS.md and make the smallest valuable change (a test, a bug, a docs gap). Ask the slides' question with them: "Si le saco Stellar, ¿deja de funcionar?" If not, help them find the one thing Stellar really does in their project; that can be the contribution. No project yet? Follow `references/build.md`.
